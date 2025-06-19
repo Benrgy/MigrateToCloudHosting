@@ -1,24 +1,189 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>code-hello-deploy</title>
-    <meta name="description" content="Lovable Generated Project" />
+    <title>Hello World - Simple Website</title>
+    <meta name="description" content="A simple Hello World website built with HTML, CSS, and JavaScript" />
     <meta name="author" content="Lovable" />
-
-    <meta property="og:title" content="code-hello-deploy" />
-    <meta property="og:description" content="Lovable Generated Project" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta property="og:title" content="Hello World - Simple Website" />
+    <meta property="og:description" content="A simple Hello World website built with HTML, CSS, and JavaScript" />
+    
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Hello World - Simple Website" />
+    <meta name="twitter:description" content="A simple Hello World website built with HTML, CSS, and JavaScript" />
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: Arial, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+      }
+      
+      .container {
+        text-align: center;
+        padding: 2rem;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        backdrop-filter: blur(10px);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        transition: transform 0.3s ease;
+      }
+      
+      .container:hover {
+        transform: translateY(-10px);
+      }
+      
+      h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        animation: fadeInUp 1s ease-out;
+      }
+      
+      p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        animation: fadeInUp 1s ease-out 0.3s both;
+      }
+      
+      button {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 15px 0 rgba(255, 107, 107, 0.3);
+        animation: fadeInUp 1s ease-out 0.6s both;
+      }
+      
+      button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px 0 rgba(255, 107, 107, 0.4);
+      }
+      
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .click-counter {
+        margin-top: 1rem;
+        font-size: 1rem;
+        opacity: 0.8;
+        animation: fadeInUp 1s ease-out 0.9s both;
+      }
+    </style>
   </head>
 
   <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+    <div class="container">
+      <h1 id="greeting">Hello World!</h1>
+      <p>Welcome to a simple website built with HTML, CSS, and JavaScript</p>
+      <button onclick="changeGreeting()">Click me!</button>
+      <div class="click-counter">
+        Button clicked: <span id="counter">0</span> times
+      </div>
+    </div>
+
+    <script>
+      let clickCount = 0;
+      const greetings = [
+        "Hello World!",
+        "¡Hola Mundo!",
+        "Bonjour le Monde!",
+        "Hallo Welt!",
+        "Ciao Mondo!",
+        "こんにちは世界！",
+        "Olá Mundo!",
+        "Привет мир!"
+      ];
+      
+      function changeGreeting() {
+        clickCount++;
+        document.getElementById('counter').textContent = clickCount;
+        
+        const randomIndex = Math.floor(Math.random() * greetings.length);
+        const greetingElement = document.getElementById('greeting');
+        
+        // Add a fade effect
+        greetingElement.style.opacity = '0';
+        setTimeout(() => {
+          greetingElement.textContent = greetings[randomIndex];
+          greetingElement.style.opacity = '1';
+        }, 150);
+      }
+      
+      // Add some interactive effects
+      document.addEventListener('DOMContentLoaded', function() {
+        console.log('Hello World website loaded successfully!');
+        
+        // Add click effect to the container
+        const container = document.querySelector('.container');
+        container.addEventListener('click', function(e) {
+          if (e.target.tagName !== 'BUTTON') {
+            // Create ripple effect
+            const ripple = document.createElement('div');
+            ripple.style.position = 'absolute';
+            ripple.style.borderRadius = '50%';
+            ripple.style.background = 'rgba(255, 255, 255, 0.3)';
+            ripple.style.transform = 'scale(0)';
+            ripple.style.animation = 'ripple 0.6s linear';
+            ripple.style.left = (e.clientX - container.offsetLeft) + 'px';
+            ripple.style.top = (e.clientY - container.offsetTop) + 'px';
+            ripple.style.width = '20px';
+            ripple.style.height = '20px';
+            ripple.style.marginLeft = '-10px';
+            ripple.style.marginTop = '-10px';
+            
+            container.style.position = 'relative';
+            container.appendChild(ripple);
+            
+            setTimeout(() => {
+              ripple.remove();
+            }, 600);
+          }
+        });
+      });
+      
+      // Add CSS for ripple animation
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes ripple {
+          to {
+            transform: scale(4);
+            opacity: 0;
+          }
+        }
+      `;
+      document.head.appendChild(style);
+    </script>
   </body>
 </html>
