@@ -12,10 +12,12 @@
     <link rel="icon" href="/code-hello-deploy/favicon.png" type="image/png">
     <link rel="apple-touch-icon" href="/code-hello-deploy/favicon.png">
     
-    <!-- Preload critical resources -->
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" as="style" onload="this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+    <!-- Optimized font loading - preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
     
+    <!-- Fixed canonical URL to match current GitHub Pages URL -->
     <link rel="canonical" href="https://benrgy.github.io/code-hello-deploy/">
     
     <!-- Open Graph tags for social sharing -->
@@ -98,8 +100,14 @@
     
     <div id="root"></div>
     
-    <!-- Font Awesome -->
-    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+    <!-- Font Awesome with async loading for performance -->
+    <script>
+        // Async Font Awesome loading for better performance
+        const fontAwesome = document.createElement('script');
+        fontAwesome.src = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js';
+        fontAwesome.defer = true;
+        document.head.appendChild(fontAwesome);
+    </script>
     
     <script type="module" src="./src/main.tsx"></script>
 </body>
