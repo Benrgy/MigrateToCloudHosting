@@ -25,7 +25,7 @@ export default defineConfig(({ mode }) => ({
     outDir: 'dist',
     assetsDir: 'assets',
     sourcemap: false,
-    minify: 'terser',
+    minify: mode === 'production' ? 'terser' : false,
     rollupOptions: {
       output: {
         manualChunks: {
@@ -34,12 +34,14 @@ export default defineConfig(({ mode }) => ({
         }
       }
     },
-    terserOptions: {
-      compress: {
-        drop_console: mode === 'production',
-        drop_debugger: mode === 'production'
+    ...(mode === 'production' && {
+      terserOptions: {
+        compress: {
+          drop_console: true,
+          drop_debugger: true
+        }
       }
-    }
+    })
   },
   esbuild: {
     drop: mode === 'production' ? ['console', 'debugger'] : []
