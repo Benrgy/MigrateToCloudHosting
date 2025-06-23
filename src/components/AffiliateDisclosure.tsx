@@ -1,24 +1,49 @@
 
 export const AffiliateDisclosure = () => {
   return (
-    <section id="disclosure" className="py-16 bg-yellow-50 border-t border-yellow-200" aria-labelledby="disclosure-heading">
+    <section id="disclosure" className="py-12 bg-yellow-50 border-t border-yellow-200">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 id="disclosure-heading" className="text-2xl font-bold mb-6 text-yellow-800">
-            <i className="fas fa-info-circle mr-2" aria-hidden="true"></i>Affiliate Disclosure
-          </h2>
-          <div className="bg-white p-8 rounded-xl shadow-lg border border-yellow-200 text-left">
-            <p className="text-gray-700 mb-4">
-              <strong>Important:</strong> This website contains affiliate links to Cloudways hosting services. This means we may earn a commission when you make a purchase through our links, at no additional cost to you.
+          <h3 className="text-2xl font-bold text-yellow-900 mb-4">
+            <i className="fas fa-info-circle mr-2" aria-hidden="true"></i>
+            FTC Affiliate Disclosure
+          </h3>
+          <div className="text-yellow-800 space-y-4">
+            <p className="text-lg font-semibold">
+              Transparency is important to us. Here's what you need to know:
             </p>
-            <p className="text-gray-700 mb-4">
-              We only recommend Cloudways because we genuinely believe it's the best hosting solution for website migrations. Our recommendations are based on extensive testing, real client results, and our own experience managing thousands of successful migrations.
-            </p>
-            <p className="text-gray-700 mb-4">
-              <strong>Our Promise:</strong> The affiliate relationship does not influence our honest opinions, reviews, or recommendations. We maintain editorial independence and only promote services that deliver real value to our users.
-            </p>
-            <p className="text-gray-700">
-              This disclosure is in accordance with the Federal Trade Commission's guidelines on endorsements and affiliate marketing. For questions about our affiliate relationships, please contact us at <a href="mailto:bgkingdombizz2009@gmail.com" className="text-blue-600 hover:underline">bgkingdombizz2009@gmail.com</a>.
+            <div className="grid md:grid-cols-2 gap-6 text-left">
+              <div className="bg-white/70 p-6 rounded-lg">
+                <h4 className="font-semibold mb-2">
+                  <i className="fas fa-handshake text-blue-600 mr-2" aria-hidden="true"></i>
+                  Affiliate Relationships
+                </h4>
+                <p>This website contains affiliate links to hosting providers. When you make a purchase through our links, we may earn a commission at no additional cost to you.</p>
+              </div>
+              <div className="bg-white/70 p-6 rounded-lg">
+                <h4 className="font-semibold mb-2">
+                  <i className="fas fa-shield-alt text-green-600 mr-2" aria-hidden="true"></i>
+                  Our Promise
+                </h4>
+                <p>We only recommend services we genuinely believe in and use ourselves. Our affiliate relationships never influence our honest reviews and recommendations.</p>
+              </div>
+              <div className="bg-white/70 p-6 rounded-lg">
+                <h4 className="font-semibold mb-2">
+                  <i className="fas fa-dollar-sign text-purple-600 mr-2" aria-hidden="true"></i>
+                  Commission Structure
+                </h4>
+                <p>Commissions help us maintain this free resource and continue providing valuable migration advice and tools to website owners.</p>
+              </div>
+              <div className="bg-white/70 p-6 rounded-lg">
+                <h4 className="font-semibold mb-2">
+                  <i className="fas fa-balance-scale text-orange-600 mr-2" aria-hidden="true"></i>
+                  Your Choice
+                </h4>
+                <p>You're always free to go directly to any hosting provider's website. Our goal is to provide value whether you use our links or not.</p>
+              </div>
+            </div>
+            <p className="text-sm mt-6 italic">
+              This disclosure is in accordance with the Federal Trade Commission's guidelines on endorsements and testimonials.
             </p>
           </div>
         </div>

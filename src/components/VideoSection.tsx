@@ -1,44 +1,26 @@
 
 export const VideoSection = () => {
   return (
-    <section className="py-24 bg-gray-50" aria-labelledby="video-heading">
+    <section className="py-20 bg-gradient-to-br from-blue-50 to-purple-50">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-16">
-          <h2 id="video-heading" className="text-4xl md:text-5xl font-bold mb-6">See The Magic Happen</h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-            Watch how we migrate a live website in under 24 hours with zero downtime
-          </p>
-        </div>
-        <div className="max-w-4xl mx-auto">
-          <div className="relative aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl border-4 border-blue-200">
-            <iframe 
-              className="w-full h-full" 
-              src="https://www.youtube.com/embed/USaisLLUEVE" 
-              title="Website Migration Tutorial - Zero Downtime Process" 
-              frameBorder="0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-              allowFullScreen
-              loading="lazy"
-              width="800"
-              height="450">
-            </iframe>
-          </div>
-          <div className="text-center mt-8">
-            <div className="flex justify-center items-center gap-6 mb-6 text-gray-600">
-              <div className="flex items-center">
-                <i className="fas fa-play text-red-600 mr-2" aria-hidden="true"></i>
-                <span className="font-semibold">50,000+ Views</span>
-              </div>
-              <div className="flex items-center">
-                <i className="fas fa-clock text-blue-600 mr-2" aria-hidden="true"></i>
-                <span className="font-semibold">Under 10 Minutes</span>
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl font-bold text-gray-900 mb-8">
+            See How Easy Migration Can Be
+          </h2>
+          <div className="bg-white rounded-2xl shadow-2xl p-8">
+            <div className="aspect-video bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
+              <div className="text-center text-white">
+                <i className="fas fa-play-circle text-6xl mb-4 opacity-80" aria-hidden="true"></i>
+                <p className="text-xl">Watch Migration Process Demo</p>
+                <p className="text-blue-200">See how we migrate your site with zero downtime</p>
               </div>
             </div>
-            <a href="https://www.cloudways.com/en/?id=1384181" 
-               className="inline-block px-8 py-4 bg-gradient-to-r from-red-600 to-pink-600 text-white font-bold rounded-full hover:from-red-700 hover:to-pink-700 transform hover:scale-110 transition-all duration-300 shadow-lg"
-               target="_blank" rel="noopener">
-                <i className="fas fa-play mr-2" aria-hidden="true"></i>Start Your Migration Like This
-            </a>
+            <div className="mt-6">
+              <button className="bg-blue-600 text-white px-8 py-3 rounded-full hover:bg-blue-700 transition-colors duration-300 font-semibold">
+                <i className="fas fa-play mr-2" aria-hidden="true"></i>
+                Watch Demo Video
+              </button>
+            </div>
           </div>
         </div>
       </div>

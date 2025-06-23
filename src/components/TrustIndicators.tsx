@@ -1,24 +1,30 @@
 
 export const TrustIndicators = () => {
+  const indicators = [
+    { icon: "fas fa-certificate", text: "SSL Certified" },
+    { icon: "fas fa-shield-alt", text: "SOC 2 Compliant" },
+    { icon: "fas fa-award", text: "99.9% Uptime SLA" },
+    { icon: "fas fa-users", text: "10,000+ Migrations" },
+    { icon: "fas fa-clock", text: "24/7 Support" },
+    { icon: "fas fa-money-back", text: "Money Back Guarantee" }
+  ];
+
   return (
-    <section className="py-16 bg-gray-50" aria-labelledby="trust-heading">
+    <section className="py-12 bg-white border-t border-gray-100">
       <div className="container mx-auto px-6">
-        <div className="text-center mb-12">
-          <h2 id="trust-heading" className="text-2xl font-bold text-gray-800 mb-4">Trusted by Over 10,000+ Websites Worldwide</h2>
-          <div className="flex flex-wrap justify-center items-center gap-8 text-gray-600">
-            <div className="flex items-center">
-              <i className="fas fa-users text-blue-600 mr-2" aria-hidden="true"></i>
-              <span className="font-semibold">10,000+ Migrations</span>
+        <div className="text-center mb-8">
+          <h3 className="text-2xl font-bold text-gray-900 mb-2">Trusted by Thousands</h3>
+          <p className="text-gray-600">Enterprise-grade security and reliability</p>
+        </div>
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+          {indicators.map((indicator, index) => (
+            <div key={index} className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 bg-green-100 text-green-600 rounded-full mb-3">
+                <i className={indicator.icon} aria-hidden="true"></i>
+              </div>
+              <p className="text-sm font-medium text-gray-700">{indicator.text}</p>
             </div>
-            <div className="flex items-center">
-              <i className="fas fa-clock text-green-600 mr-2" aria-hidden="true"></i>
-              <span className="font-semibold">99.9% Success Rate</span>
-            </div>
-            <div className="flex items-center">
-              <i className="fas fa-award text-yellow-600 mr-2" aria-hidden="true"></i>
-              <span className="font-semibold">Industry Leading</span>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
