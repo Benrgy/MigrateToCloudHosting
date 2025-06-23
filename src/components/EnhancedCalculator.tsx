@@ -5,7 +5,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calculator, DollarSign, TrendingUp, Clock, Users, Zap } from "lucide-react";
+import { Calculator, DollarSign, TrendingUp, Clock, Users, Zap, Share2, ExternalLink } from "lucide-react";
+import { useToast } from "@/hooks/use-toast";
 
 export const EnhancedCalculator = () => {
   const [currentCost, setCurrentCost] = useState<number>(0);
@@ -14,6 +15,7 @@ export const EnhancedCalculator = () => {
   const [averageOrderValue, setAverageOrderValue] = useState<number>(50);
   const [loadingTime, setLoadingTime] = useState<number>(5);
   const [showResults, setShowResults] = useState(false);
+  const { toast } = useToast();
 
   const calculateMetrics = () => {
     // Lost revenue due to slow loading (every 1 second delay reduces conversions by 7%)
@@ -45,7 +47,50 @@ export const EnhancedCalculator = () => {
   const metrics = calculateMetrics();
 
   const handleCalculate = () => {
+    if (visitors === 0) {
+      toast({
+        title: "Please enter your monthly visitors",
+        description: "We need this information to calculate your potential savings.",
+        variant: "destructive",
+      });
+      return;
+    }
     setShowResults(true);
+    // Smooth scroll to results
+    setTimeout(() => {
+      const resultsElement = document.getElementById('calculator-results');
+      if (resultsElement) {
+        resultsElement.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 100);
+  };
+
+  const shareCalculator = async () => {
+    const shareData = {
+      title: 'Website Speed Cost Calculator - See How Much Slow Hosting Costs You',
+      text: `I just discovered I'm losing $${metrics.lostRevenue.toFixed(0)}/month due to slow hosting! Check how much you're losing:`,
+      url: window.location.href
+    };
+
+    if (navigator.share && navigator.canShare(shareData)) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        // Fallback to copying URL
+        copyToClipboard();
+      }
+    } else {
+      copyToClipboard();
+    }
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      toast({
+        title: "Link copied!",
+        description: "Calculator URL has been copied to your clipboard.",
+      });
+    });
   };
 
   return (
@@ -60,9 +105,17 @@ export const EnhancedCalculator = () => {
             <h1 className="text-5xl font-bold text-gray-900 mb-6">
               Website Performance Cost Calculator
             </h1>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto mb-6">
               Discover exactly how much your slow hosting is costing you in lost sales, frustrated customers, and damaged SEO rankings
             </p>
+            <Button
+              onClick={shareCalculator}
+              variant="outline"
+              className="mb-4"
+            >
+              <Share2 className="w-4 h-4 mr-2" />
+              Share This Calculator
+            </Button>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-8">
@@ -141,7 +194,28 @@ export const EnhancedCalculator = () => {
                     placeholder="e.g., 4.5"
                     className="text-lg p-4 border-2 focus:border-red-500"
                   />
-                  <p className="text-sm text-gray-500">⚡ Test at GTmetrix.com or Google PageSpeed (under 2s is ideal)</p>
+                  <div className="text-sm text-gray-500 space-y-1">
+                    <p>⚡ Test your speed here (under 2s is ideal):</p>
+                    <div className="flex flex-wrap gap-2">
+                      <a 
+                        href="https://gtmetrix.com/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-blue-600 hover:text-blue-800 underline"
+                      >
+                        GTmetrix <ExternalLink className="w-3 h-3 ml-1" />
+                      </a>
+                      <span>•</span>
+                      <a 
+                        href="https://pagespeed.web.dev/" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center text-blue-600 hover:text-blue-800 underline"
+                      >
+                        Google PageSpeed <ExternalLink className="w-3 h-3 ml-1" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
 
                 <div className="space-y-3">
@@ -169,8 +243,8 @@ export const EnhancedCalculator = () => {
             </Card>
 
             {/* Results */}
-            <div className="space-y-6">
-              {showResults && visitors > 0 && (
+            <div className="space-y-6" id="calculator-results">
+              {showResults && visitors > 0 ? (
                 <>
                   <Card className="border-red-200 bg-red-50">
                     <CardHeader>
@@ -240,12 +314,20 @@ export const EnhancedCalculator = () => {
                       <p className="text-sm mt-4 text-purple-100">
                         Zero downtime • SEO protected • 24/7 support
                       </p>
+                      <div className="mt-6 pt-4 border-t border-purple-300">
+                        <Button
+                          onClick={shareCalculator}
+                          variant="outline"
+                          className="bg-transparent border-white text-white hover:bg-white hover:text-purple-600"
+                        >
+                          <Share2 className="w-4 h-4 mr-2" />
+                          Share These Results
+                        </Button>
+                      </div>
                     </CardContent>
                   </Card>
                 </>
-              )}
-
-              {!showResults && (
+              ) : (
                 <Card className="border-dashed border-gray-300">
                   <CardContent className="p-12 text-center text-gray-500">
                     <Calculator className="w-16 h-16 mx-auto mb-4 text-gray-300" />
