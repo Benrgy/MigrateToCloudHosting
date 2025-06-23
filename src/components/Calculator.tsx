@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Link } from "react-router-dom";
 
 export const Calculator = () => {
   const [currentCost, setCurrentCost] = useState<number>(0);
@@ -32,7 +33,7 @@ export const Calculator = () => {
           
           <Card className="max-w-2xl mx-auto">
             <CardHeader>
-              <CardTitle>Migration Savings Calculator</CardTitle>
+              <CardTitle>Quick Migration Savings Calculator</CardTitle>
               <CardDescription>
                 Calculate the cost of staying on slow shared hosting
               </CardDescription>
@@ -80,12 +81,19 @@ export const Calculator = () => {
                 </p>
               </div>
               
-              <Button 
-                className="w-full bg-blue-600 hover:bg-blue-700"
-                onClick={() => window.open('https://www.cloudways.com/en/?id=1384181', '_blank')}
-              >
-                Start Your Free Migration Today
-              </Button>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button 
+                  className="flex-1 bg-blue-600 hover:bg-blue-700"
+                  onClick={() => window.open('https://www.cloudways.com/en/?id=1384181', '_blank')}
+                >
+                  Start Your Free Migration Today
+                </Button>
+                <Link to="/calculator">
+                  <Button variant="outline" className="w-full sm:w-auto">
+                    Advanced Calculator
+                  </Button>
+                </Link>
+              </div>
             </CardContent>
           </Card>
         </div>

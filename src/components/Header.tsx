@@ -1,22 +1,38 @@
 
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
 
 export const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
+  const isHomePage = location.pathname === '/';
+
+  const scrollToSection = (sectionId: string) => {
+    if (isHomePage) {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    } else {
+      // Navigate to home page with hash
+      window.location.href = `/#${sectionId}`;
+    }
+    setIsMobileMenuOpen(false);
+  };
 
   return (
-    <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-40" role="banner" style={{top: '40px'}}>
+    <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-40" role="banner" style={{top: '0px'}}>
       <nav className="container mx-auto px-6 py-4" role="navigation" aria-label="Main navigation">
         <div className="flex items-center justify-between">
-          <a href="https://MigrateToCloudHosting.com" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300" aria-label="MigrateToCloudHosting - Home">
+          <Link to="/" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300" aria-label="MigrateToCloudHosting - Home">
             <i className="fas fa-server mr-2" aria-hidden="true"></i>MigrateToCloudHosting
-          </a>
+          </Link>
           <div className="hidden md:flex space-x-8">
-            <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Features</a>
-            <a href="#benefits" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Benefits</a>
-            <a href="#testimonials" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Reviews</a>
-            <a href="#calculator" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Calculator</a>
-            <a href="#faq" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">FAQ</a>
+            <button onClick={() => scrollToSection('features')} className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Features</button>
+            <button onClick={() => scrollToSection('benefits')} className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Benefits</button>
+            <button onClick={() => scrollToSection('testimonials')} className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Reviews</button>
+            <Link to="/calculator" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Calculator</Link>
+            <button onClick={() => scrollToSection('faq')} className="text-gray-600 hover:text-blue-600 transition-colors duration-300">FAQ</button>
           </div>
           <button 
             className="mobile-menu-button md:hidden" 
@@ -34,11 +50,11 @@ export const Header = () => {
         </div>
         {isMobileMenuOpen && (
           <div className="mobile-menu md:hidden mt-4 bg-white rounded-lg shadow-lg absolute left-0 right-0 mx-6 p-4">
-            <a href="#features" className="block py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Features</a>
-            <a href="#benefits" className="block py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Benefits</a>
-            <a href="#testimonials" className="block py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Reviews</a>
-            <a href="#calculator" className="block py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Calculator</a>
-            <a href="#faq" className="block py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>FAQ</a>
+            <button onClick={() => scrollToSection('features')} className="block w-full text-left py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300">Features</button>
+            <button onClick={() => scrollToSection('benefits')} className="block w-full text-left py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300">Benefits</button>
+            <button onClick={() => scrollToSection('testimonials')} className="block w-full text-left py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300">Reviews</button>
+            <Link to="/calculator" className="block py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300" onClick={() => setIsMobileMenuOpen(false)}>Calculator</Link>
+            <button onClick={() => scrollToSection('faq')} className="block w-full text-left py-2 px-4 text-gray-600 hover:bg-blue-50 hover:text-blue-600 rounded transition-colors duration-300">FAQ</button>
             <a href="https://www.cloudways.com/en/?id=1384181" 
                className="block mt-2 px-4 py-2 bg-blue-600 text-white text-center rounded-full hover:bg-blue-700 transition-colors duration-300"
                target="_blank" rel="noopener">Start Free Trial</a>
