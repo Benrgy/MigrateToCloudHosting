@@ -6,15 +6,14 @@ import { componentTagger } from "lovable-tagger";
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  base: mode === 'production' && process.env.GITHUB_PAGES ? '/code-hello-deploy/' : '/',
+  base: mode === 'production' ? '/code-hello-deploy/' : '/',
   server: {
     host: "::",
     port: 8080,
   },
   plugins: [
     react(),
-    mode === 'development' &&
-    componentTagger(),
+    mode === 'development' && componentTagger(),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -33,17 +32,6 @@ export default defineConfig(({ mode }) => ({
           ui: ['@radix-ui/react-accordion', '@radix-ui/react-dialog', '@radix-ui/react-toast']
         }
       }
-    },
-    ...(mode === 'production' && {
-      terserOptions: {
-        compress: {
-          drop_console: true,
-          drop_debugger: true
-        }
-      }
-    })
-  },
-  esbuild: {
-    drop: mode === 'production' ? ['console', 'debugger'] : []
+    }
   }
 }));
