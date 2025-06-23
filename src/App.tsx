@@ -7,6 +7,7 @@ import { HashRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CalculatorPage from "./pages/CalculatorPage";
+import ThankYouPage from "./pages/ThankYouPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -26,6 +27,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/calculator" element={<CalculatorPage />} />
+          <Route path="/thank-you" element={<ThankYouPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </HashRouter>

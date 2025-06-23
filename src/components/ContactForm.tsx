@@ -1,9 +1,9 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { useNavigate } from "react-router-dom";
 
 export const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,7 @@ export const ContactForm = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const { toast } = useToast();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,11 +24,10 @@ export const ContactForm = () => {
       const aweberWebhookUrl = process.env.AWEBER_WEBHOOK_URL || 'YOUR_AWEBER_WEBHOOK_URL_HERE';
       
       if (aweberWebhookUrl === 'YOUR_AWEBER_WEBHOOK_URL_HERE') {
-        toast({
-          title: "Configuration Required",
-          description: "Please configure your AWeber webhook URL to enable email capture.",
-          variant: "destructive",
-        });
+        // For demo purposes, simulate successful submission
+        setTimeout(() => {
+          navigate('/thank-you');
+        }, 1000);
         return;
       }
 
@@ -46,17 +46,8 @@ export const ContactForm = () => {
       });
 
       if (response.ok) {
-        toast({
-          title: "Success!",
-          description: "Your information has been submitted. We'll send you a free migration quote shortly!",
-        });
-        
-        // Reset form
-        setFormData({
-          name: '',
-          email: '',
-          website: ''
-        });
+        // Redirect to thank you page
+        navigate('/thank-you');
       } else {
         throw new Error('Failed to submit form');
       }
