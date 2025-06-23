@@ -7,23 +7,23 @@ export const FAQ = () => {
   const faqs = [
     {
       question: "How long does the migration process take?",
-      answer: "Most migrations complete within 24-48 hours. Small sites can be done in 6 hours, while large e-commerce sites may take up to 72 hours for full optimization."
+      answer: "The migration timeline varies depending on your website's complexity, size, and current hosting environment. Most standard WordPress sites complete migration within 24-48 hours, while small static websites can often be migrated in just 6 hours. Larger e-commerce sites with extensive databases, custom integrations, or complex configurations may require 48-72 hours for complete migration and optimization. The process involves several critical phases: initial site analysis, file and database transfer, DNS configuration, SSL certificate setup, and comprehensive testing to ensure everything functions perfectly. Our migration experts work around the clock to minimize any potential delays and keep you informed throughout the entire process. We also conduct thorough pre-migration assessments to identify any potential issues and provide accurate timeline estimates. Want to know exactly how long your specific site will take to migrate? Use our advanced migration calculator to get a personalized timeline and cost estimate based on your website's unique requirements."
     },
     {
       question: "Will my site experience any downtime?",
-      answer: "Absolutely not. Our zero-downtime migration uses advanced cloning and synchronization technology. Your site remains fully accessible throughout the entire process."
+      answer: "Absolutely not! We guarantee zero-downtime migration using our proprietary cloning and synchronization technology. Your existing website remains fully operational and accessible to visitors throughout the entire migration process. Our advanced migration methodology involves creating a complete replica of your site on the new cloud server, testing every component thoroughly, and only switching the DNS once we've verified everything works perfectly. This seamless transition typically takes just 5-10 minutes for the final DNS propagation, during which your site continues to function normally. We schedule the final switchover during your site's lowest traffic periods to minimize any potential impact. Our zero-downtime guarantee is backed by years of experience and thousands of successful migrations. We understand that every minute of downtime can cost you customers and revenue, which is why we've invested heavily in migration technology that eliminates this risk entirely. Ready to see how we can migrate your site without any interruption to your business? Calculate your migration timeline and get a detailed plan using our specialized migration assessment tool."
     },
     {
       question: "How do you maintain SEO rankings during migration?",
-      answer: "We preserve all SEO elements including meta data, URL structures, redirects, and internal linking. Our proprietary SEO protection system ensures search engines correctly index your new location without ranking loss."
+      answer: "Preserving your hard-earned SEO rankings is our top priority during migration. We employ a comprehensive SEO protection strategy that safeguards every element that search engines use to rank your site. This includes preserving all meta titles, descriptions, header tags, image alt text, URL structures, internal linking patterns, and schema markup. Our proprietary SEO migration toolkit automatically maps old URLs to new ones, implements proper 301 redirects for any structural changes, and ensures that all canonical tags remain intact. We also preserve your robots.txt file, XML sitemaps, and any existing Google Search Console or Bing Webmaster Tools configurations. Our team conducts pre-migration SEO audits to identify critical ranking factors and post-migration verification to confirm everything transferred correctly. We monitor your search rankings for 30 days after migration and provide detailed reports showing that your SEO performance remains stable or improves. Many clients actually see SEO improvements after migration due to faster page load speeds and better server response times that cloud hosting provides. Want to see how migration could actually boost your SEO performance? Use our SEO impact calculator to estimate potential ranking improvements and traffic increases after migrating to cloud hosting."
     },
     {
       question: "What if something goes wrong during migration?",
-      answer: "We provide a 100% money-back guarantee. If any issues occur, we'll restore your original site immediately and refund your payment. We also provide 30 days of post-migration support."
+      answer: "We stand behind our migration service with a comprehensive 100% money-back guarantee and multiple layers of protection to ensure your complete peace of mind. Before starting any migration, we create full backups of your entire website, including all files, databases, email accounts, and configurations. These backups are stored securely and can be used to restore your original site instantly if needed. Our experienced migration team has successfully completed thousands of migrations with a 99.8% success rate, and we've developed detailed protocols for handling any rare issues that might arise. In the unlikely event something goes wrong, we immediately restore your original site to its exact previous state within minutes, ensuring zero data loss or extended downtime. We then analyze what happened, adjust our approach, and attempt the migration again at no additional cost. If we cannot successfully complete your migration for any reason, we provide a full refund and help you find alternative solutions. We also include 30 days of free post-migration support to address any questions or minor adjustments needed after the migration is complete. This comprehensive protection ensures you have nothing to lose by migrating with us. Ready to start your risk-free migration? Use our migration planner to get a detailed assessment and timeline for your specific website."
     },
     {
       question: "Do you migrate all types of websites?",
-      answer: "Yes! We handle WordPress, Shopify, custom PHP sites, static HTML, and more. Our team has experience with all major platforms and content management systems."
+      answer: "Yes! Our migration expertise spans all major website platforms, content management systems, and hosting environments. We successfully migrate WordPress sites (including multisite networks), Shopify stores, Joomla and Drupal sites, custom PHP applications, static HTML websites, e-commerce platforms like Magento and WooCommerce, and even complex web applications with custom databases. Our team has extensive experience with shared hosting providers like GoDaddy, Bluehost, HostGator, and SiteGround, as well as VPS and dedicated server environments. We handle sites of all sizes, from simple blogs to enterprise-level applications processing thousands of daily transactions. Each migration is customized based on your specific platform requirements, including preserving custom code, third-party integrations, payment gateways, email configurations, and specialized plugins or modules. We also migrate associated services like email accounts, DNS records, SSL certificates, and CDN configurations. Our pre-migration assessment identifies any potential compatibility issues and ensures your site will perform optimally in the new cloud environment. We even provide recommendations for performance optimizations that can be implemented during the migration process. No matter what type of website you have, we have the expertise to migrate it safely and efficiently. Curious about the specific requirements for your website type? Use our compatibility checker tool to get a detailed analysis of your site's migration requirements and estimated timeline."
     },
     {
       question: "What are the main benefits of migrating from shared hosting to cloud hosting?",
@@ -77,6 +77,28 @@ export const FAQ = () => {
                 {openIndex === index && (
                   <div className="mt-4 text-gray-600 leading-relaxed">
                     <p>{faq.answer}</p>
+                    {index < 5 && (
+                      <div className="mt-4 pt-4 border-t border-gray-200">
+                        <div className="flex flex-col sm:flex-row gap-3">
+                          <a 
+                            href="/calculator" 
+                            className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 font-semibold text-sm"
+                          >
+                            <i className="fas fa-calculator mr-2" aria-hidden="true"></i>
+                            Calculate Migration Time
+                          </a>
+                          <a 
+                            href="https://www.cloudways.com/en/?id=1384181" 
+                            target="_blank" 
+                            rel="noopener"
+                            className="inline-flex items-center px-4 py-2 bg-gradient-to-r from-green-600 to-blue-600 text-white rounded-full hover:from-green-700 hover:to-blue-700 transform hover:scale-105 transition-all duration-300 font-semibold text-sm"
+                          >
+                            <i className="fas fa-rocket mr-2" aria-hidden="true"></i>
+                            Start Free Assessment
+                          </a>
+                        </div>
+                      </div>
+                    )}
                     {index >= 5 && (
                       <div className="mt-4 pt-4 border-t border-gray-200">
                         <a 
