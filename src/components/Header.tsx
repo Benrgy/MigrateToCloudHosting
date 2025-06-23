@@ -8,8 +8,8 @@ export const Header = () => {
     <header className="fixed w-full bg-white/95 backdrop-blur-sm shadow-sm z-40" role="banner" style={{top: '40px'}}>
       <nav className="container mx-auto px-6 py-4" role="navigation" aria-label="Main navigation">
         <div className="flex items-center justify-between">
-          <a href="#" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300" aria-label="MigrateHost - Home">
-            <i className="fas fa-server mr-2" aria-hidden="true"></i>MigrateHost
+          <a href="https://MigrateToCloudHosting.com" className="text-2xl font-bold text-blue-600 hover:text-blue-700 transition-colors duration-300" aria-label="MigrateToCloudHosting - Home">
+            <i className="fas fa-server mr-2" aria-hidden="true"></i>MigrateToCloudHosting
           </a>
           <div className="hidden md:flex space-x-8">
             <a href="#features" className="text-gray-600 hover:text-blue-600 transition-colors duration-300">Features</a>
