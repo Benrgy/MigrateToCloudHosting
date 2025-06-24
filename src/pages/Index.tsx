@@ -13,7 +13,7 @@ import { FinalCTA } from "@/components/FinalCTA";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { ContactForm } from "@/components/ContactForm";
 
-const Index = () => {
+export default function Index() {
   return (
     <div className="min-h-screen bg-gray-50">
       <Header />
@@ -35,6 +35,4 @@ const Index = () => {
       <Footer />
     </div>
   );
-};
-
-export default Index;
+}
