@@ -135,12 +135,12 @@ export const ContactForm = () => {
               >
                 {isSubmitting ? (
                   <>
-                    <i className="fas fa-spinner fa-spin mr-2" aria-hidden="true"></i>
+                    <span className="mr-2">⏳</span>
                     Analyzing Your Site...
                   </>
                 ) : (
                   <>
-                    <i className="fas fa-rocket mr-2" aria-hidden="true"></i>
+                    <span className="mr-2">🚀</span>
                     Get My Free Assessment
                   </>
                 )}
@@ -149,7 +149,7 @@ export const ContactForm = () => {
 
             <div className="mt-6 text-center">
               <p className="text-sm text-gray-600">
-                <i className="fas fa-shield-check mr-2 text-green-600" aria-hidden="true"></i>
+                <span className="mr-2 text-green-600">🛡️</span>
                 100% Free • No Obligation • Secure & Private
               </p>
             </div>

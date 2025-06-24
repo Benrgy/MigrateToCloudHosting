@@ -21,8 +21,8 @@ const Index = () => {
       <main id="main-content">
         <Hero />
         <ContactForm />
-        <Calculator />
         <TrustIndicators />
+        <Calculator />
         <Features />
         <VideoSection />
         <Benefits />

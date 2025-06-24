@@ -1,5 +1,5 @@
 
-import { ContactForm } from "./ContactForm";
+import { Button } from "@/components/ui/button";
 
 export const Hero = () => {
   return (
@@ -36,20 +36,14 @@ export const Hero = () => {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-12">
             <a href="https://www.cloudways.com/en/?id=1384181" 
-               className="inline-block px-10 py-5 bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 text-2xl font-bold rounded-full hover:from-yellow-500 hover:to-orange-500 transform hover:scale-110 transition-all duration-300 shadow-2xl gpu-accelerated"
+               className="inline-block px-10 py-5 bg-gradient-to-r from-yellow-400 to-orange-400 text-gray-900 text-2xl font-bold rounded-full hover:from-yellow-500 hover:to-orange-500 transform hover:scale-110 transition-all duration-300 shadow-2xl"
                target="_blank" rel="noopener">
                 <i className="fas fa-rocket mr-3" aria-hidden="true"></i>Start FREE 3-Day Trial
             </a>
-            <a href="#calculator" 
-               className="inline-block px-10 py-5 bg-white/20 backdrop-blur-sm text-white text-xl font-bold rounded-full hover:bg-white/30 transform hover:scale-110 transition-all duration-300 border-2 border-white/30 gpu-accelerated">
-                <i className="fas fa-calculator mr-3" aria-hidden="true"></i>Calculate Savings
+            <a href="#contact" 
+               className="inline-block px-10 py-5 bg-white/20 backdrop-blur-sm text-white text-xl font-bold rounded-full hover:bg-white/30 transform hover:scale-110 transition-all duration-300 border-2 border-white/30">
+                <i className="fas fa-calculator mr-3" aria-hidden="true"></i>Get Free Assessment
             </a>
-          </div>
-          
-          {/* Contact Form Section */}
-          <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 max-w-2xl mx-auto">
-            <h2 className="text-2xl font-bold mb-6 text-white">Get Your Free Migration Assessment</h2>
-            <ContactForm />
           </div>
           
           <p className="text-sm text-blue-200 mt-6">
