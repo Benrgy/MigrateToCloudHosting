@@ -29,7 +29,6 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Simulate form submission
       await new Promise(resolve => setTimeout(resolve, 1000));
       
       console.log('Form submitted:', formData);
@@ -39,7 +38,6 @@ export const ContactForm = () => {
         description: "We'll send your migration plan within 24 hours.",
       });
 
-      // Navigate to thank you page
       navigate('/thank-you');
     } catch (error) {
       console.error('Form submission error:', error);
