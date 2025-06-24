@@ -11,6 +11,7 @@ import { VideoSection } from "@/components/VideoSection";
 import { TrustIndicators } from "@/components/TrustIndicators";
 import { FinalCTA } from "@/components/FinalCTA";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
+import { ContactForm } from "@/components/ContactForm";
 
 const Index = () => {
   return (
@@ -19,6 +20,7 @@ const Index = () => {
       
       <main id="main-content">
         <Hero />
+        <ContactForm />
         <Calculator />
         <TrustIndicators />
         <Features />
