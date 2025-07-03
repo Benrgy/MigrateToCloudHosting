@@ -9,6 +9,39 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      analytics_events: {
+        Row: {
+          created_at: string
+          event_data: Json | null
+          event_type: string
+          id: string
+          ip_address: unknown | null
+          session_id: string | null
+          user_agent: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string
+          event_data?: Json | null
+          event_type: string
+          id?: string
+          ip_address?: unknown | null
+          session_id?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string
+          event_data?: Json | null
+          event_type?: string
+          id?: string
+          ip_address?: unknown | null
+          session_id?: string | null
+          user_agent?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       blog_posts: {
         Row: {
           author: string | null
@@ -54,6 +87,242 @@ export type Database = {
           slug?: string
           title?: string
           updated_at?: string
+        }
+        Relationships: []
+      }
+      contact_submissions: {
+        Row: {
+          created_at: string
+          current_host: string
+          email: string
+          id: string
+          lead_score: number | null
+          name: string
+          notes: string | null
+          status: string | null
+          submitted_at: string
+          updated_at: string
+          website: string
+        }
+        Insert: {
+          created_at?: string
+          current_host: string
+          email: string
+          id?: string
+          lead_score?: number | null
+          name: string
+          notes?: string | null
+          status?: string | null
+          submitted_at?: string
+          updated_at?: string
+          website: string
+        }
+        Update: {
+          created_at?: string
+          current_host?: string
+          email?: string
+          id?: string
+          lead_score?: number | null
+          name?: string
+          notes?: string | null
+          status?: string | null
+          submitted_at?: string
+          updated_at?: string
+          website?: string
+        }
+        Relationships: []
+      }
+      email_subscribers: {
+        Row: {
+          email: string
+          id: string
+          name: string | null
+          preferences: Json | null
+          source: string | null
+          subscribed_at: string
+          unsubscribed_at: string | null
+        }
+        Insert: {
+          email: string
+          id?: string
+          name?: string | null
+          preferences?: Json | null
+          source?: string | null
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+        }
+        Update: {
+          email?: string
+          id?: string
+          name?: string | null
+          preferences?: Json | null
+          source?: string | null
+          subscribed_at?: string
+          unsubscribed_at?: string | null
+        }
+        Relationships: []
+      }
+      hosting_plans: {
+        Row: {
+          bandwidth_gb: number | null
+          cpu_cores: number | null
+          created_at: string
+          features: Json | null
+          id: string
+          is_active: boolean | null
+          is_popular: boolean | null
+          name: string
+          price_annual: number | null
+          price_monthly: number
+          provider_id: string
+          ram_gb: number | null
+          slug: string
+          storage_gb: number | null
+        }
+        Insert: {
+          bandwidth_gb?: number | null
+          cpu_cores?: number | null
+          created_at?: string
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_popular?: boolean | null
+          name: string
+          price_annual?: number | null
+          price_monthly: number
+          provider_id: string
+          ram_gb?: number | null
+          slug: string
+          storage_gb?: number | null
+        }
+        Update: {
+          bandwidth_gb?: number | null
+          cpu_cores?: number | null
+          created_at?: string
+          features?: Json | null
+          id?: string
+          is_active?: boolean | null
+          is_popular?: boolean | null
+          name?: string
+          price_annual?: number | null
+          price_monthly?: number
+          provider_id?: string
+          ram_gb?: number | null
+          slug?: string
+          storage_gb?: number | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "hosting_plans_provider_id_fkey"
+            columns: ["provider_id"]
+            isOneToOne: false
+            referencedRelation: "hosting_providers"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      hosting_providers: {
+        Row: {
+          base_url: string | null
+          created_at: string
+          id: string
+          is_active: boolean | null
+          logo_url: string | null
+          name: string
+          pricing_api_endpoint: string | null
+          slug: string
+        }
+        Insert: {
+          base_url?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string | null
+          name: string
+          pricing_api_endpoint?: string | null
+          slug: string
+        }
+        Update: {
+          base_url?: string | null
+          created_at?: string
+          id?: string
+          is_active?: boolean | null
+          logo_url?: string | null
+          name?: string
+          pricing_api_endpoint?: string | null
+          slug?: string
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          company: string | null
+          created_at: string
+          email: string | null
+          full_name: string | null
+          id: string
+          preferences: Json | null
+          role: string | null
+          updated_at: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id: string
+          preferences?: Json | null
+          role?: string | null
+          updated_at?: string
+        }
+        Update: {
+          avatar_url?: string | null
+          company?: string | null
+          created_at?: string
+          email?: string | null
+          full_name?: string | null
+          id?: string
+          preferences?: Json | null
+          role?: string | null
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      saved_calculations: {
+        Row: {
+          created_at: string
+          id: string
+          inputs: Json
+          is_favorite: boolean | null
+          name: string
+          results: Json
+          tags: string[] | null
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          inputs: Json
+          is_favorite?: boolean | null
+          name: string
+          results: Json
+          tags?: string[] | null
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          inputs?: Json
+          is_favorite?: boolean | null
+          name?: string
+          results?: Json
+          tags?: string[] | null
+          updated_at?: string
+          user_id?: string
         }
         Relationships: []
       }

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 interface FormData {
   name: string;
@@ -29,13 +30,36 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
-      console.log('Form submitted:', formData);
+      // Insert form data into Supabase
+      const { data, error } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            website: formData.website,
+            current_host: formData.currentHost,
+          }
+        ])
+        .select();
+
+      if (error) {
+        throw error;
+      }
+
+      console.log('Form submitted successfully:', data);
       
       toast({
         title: "Assessment Request Submitted!",
         description: "We'll send your migration plan within 24 hours.",
+      });
+
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        website: "",
+        currentHost: ""
       });
 
       navigate('/thank-you');
