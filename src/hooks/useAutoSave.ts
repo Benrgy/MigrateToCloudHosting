@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 
 interface AutoSaveData {
   [key: string]: any;
@@ -6,27 +6,61 @@ interface AutoSaveData {
 
 export const useAutoSave = (key: string, data: AutoSaveData, delay: number = 2000) => {
   const [lastSaved, setLastSaved] = useState<Date | null>(null);
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const dataRef = useRef<string>('');
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      if (Object.values(data).some(value => value !== '')) {
-        localStorage.setItem(key, JSON.stringify(data));
-        setLastSaved(new Date());
+    const currentDataString = JSON.stringify(data);
+    
+    // Only save if data has actually changed
+    if (currentDataString === dataRef.current) {
+      return;
+    }
+    
+    dataRef.current = currentDataString;
+
+    // Clear previous timer
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+    // Set new timer with debouncing
+    timerRef.current = setTimeout(() => {
+      if (Object.values(data).some(value => value !== '' && value !== null && value !== undefined)) {
+        try {
+          localStorage.setItem(key, JSON.stringify(data));
+          setLastSaved(new Date());
+        } catch (error) {
+          console.warn('Failed to save to localStorage:', error);
+        }
       }
     }, delay);
 
-    return () => clearTimeout(timer);
+    return () => {
+      if (timerRef.current) {
+        clearTimeout(timerRef.current);
+      }
+    };
   }, [data, key, delay]);
 
-  const clearSaved = () => {
-    localStorage.removeItem(key);
-    setLastSaved(null);
-  };
+  const clearSaved = useCallback(() => {
+    try {
+      localStorage.removeItem(key);
+      setLastSaved(null);
+    } catch (error) {
+      console.warn('Failed to clear localStorage:', error);
+    }
+  }, [key]);
 
-  const loadSaved = (): AutoSaveData | null => {
-    const saved = localStorage.getItem(key);
-    return saved ? JSON.parse(saved) : null;
-  };
+  const loadSaved = useCallback((): AutoSaveData | null => {
+    try {
+      const saved = localStorage.getItem(key);
+      return saved ? JSON.parse(saved) : null;
+    } catch (error) {
+      console.warn('Failed to load from localStorage:', error);
+      return null;
+    }
+  }, [key]);
 
   return {
     lastSaved,

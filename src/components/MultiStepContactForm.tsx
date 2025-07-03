@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -60,17 +60,27 @@ export const MultiStepContactForm = () => {
   // Auto-save functionality
   const { lastSaved, clearSaved, loadSaved } = useAutoSave('contact-form-data', formData);
 
-  // Form validation
-  const validationRules = {
+  // Memoized validation rules to prevent infinite loops
+  const validationRules = useMemo(() => ({
     name: { required: true, minLength: 2 },
     email: { required: true, email: true },
     website: { required: true, url: true },
     currentHost: { required: true, minLength: 2 },
     monthlyTraffic: { required: true },
     businessType: { required: true }
-  };
+  }), []);
 
-  const { errors, validateField } = useFormValidation(validationRules, formData as unknown as Record<string, string>);
+  // Convert formData to Record<string, string> for validation
+  const formDataForValidation = useMemo(() => ({
+    name: formData.name,
+    email: formData.email,
+    website: formData.website,
+    currentHost: formData.currentHost,
+    monthlyTraffic: formData.monthlyTraffic,
+    businessType: formData.businessType
+  }), [formData]);
+
+  const { errors, validateField } = useFormValidation(validationRules, formDataForValidation);
 
   // Load saved data on component mount
   useEffect(() => {
@@ -84,7 +94,7 @@ export const MultiStepContactForm = () => {
     }
   }, []);
 
-  const handleInputChange = (field: keyof FormData, value: string) => {
+  const handleInputChange = useCallback((field: keyof FormData, value: string) => {
     setFormData(prev => ({
       ...prev,
       [field]: value
@@ -97,9 +107,9 @@ export const MultiStepContactForm = () => {
       analytics.trackContactFormStart();
       setHasStartedForm(true);
     }
-  };
+  }, [validateField, hasStartedForm]);
 
-  const validateStep = (step: number): boolean => {
+  const validateStep = useCallback((step: number): boolean => {
     switch (step) {
       case 1:
         return !errors.name && !errors.email && formData.name.length > 0 && formData.email.length > 0;
@@ -110,9 +120,9 @@ export const MultiStepContactForm = () => {
       default:
         return true;
     }
-  };
+  }, [errors, formData]);
 
-  const nextStep = () => {
+  const nextStep = useCallback(() => {
     if (validateStep(currentStep)) {
       setCurrentStep(prev => Math.min(prev + 1, steps.length));
     } else {
@@ -122,13 +132,13 @@ export const MultiStepContactForm = () => {
         variant: "destructive",
       });
     }
-  };
+  }, [currentStep, validateStep, toast]);
 
-  const prevStep = () => {
+  const prevStep = useCallback(() => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
-  };
+  }, []);
 
-  const handleSubmit = async () => {
+  const handleSubmit = useCallback(async () => {
     if (!validateStep(3)) {
       toast({
         title: "Please complete all fields",
@@ -202,9 +212,9 @@ export const MultiStepContactForm = () => {
     } finally {
       setIsSubmitting(false);
     }
-  };
+  }, [validateStep, formData, currentStep, clearSaved, toast, navigate]);
 
-  const progressPercentage = (currentStep / steps.length) * 100;
+  const progressPercentage = useMemo(() => (currentStep / steps.length) * 100, [currentStep]);
 
   return (
     <section id="contact" className="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo, useCallback } from 'react';
 
 interface ValidationRule {
   required?: boolean;
@@ -22,8 +22,14 @@ export const useFormValidation = (rules: FieldValidation, data: Record<string, s
   const [errors, setErrors] = useState<ValidationResult>({});
   const [isValid, setIsValid] = useState(false);
 
-  const validateField = (fieldName: string, value: string): string | null => {
-    const rule = rules[fieldName];
+  // Memoize rules to prevent infinite loops
+  const memoizedRules = useMemo(() => rules, [JSON.stringify(rules)]);
+  
+  // Memoize data to prevent infinite loops
+  const memoizedData = useMemo(() => data, [JSON.stringify(data)]);
+
+  const validateField = useCallback((fieldName: string, value: string): string | null => {
+    const rule = memoizedRules[fieldName];
     if (!rule) return null;
 
     if (rule.required && (!value || value.trim().length === 0)) {
@@ -55,30 +61,30 @@ export const useFormValidation = (rules: FieldValidation, data: Record<string, s
     }
 
     return null;
-  };
+  }, [memoizedRules]);
 
   useEffect(() => {
     const newErrors: ValidationResult = {};
     let hasErrors = false;
 
-    Object.keys(rules).forEach(fieldName => {
-      const error = validateField(fieldName, data[fieldName] || '');
+    Object.keys(memoizedRules).forEach(fieldName => {
+      const error = validateField(fieldName, memoizedData[fieldName] || '');
       newErrors[fieldName] = error;
       if (error) hasErrors = true;
     });
 
     setErrors(newErrors);
     setIsValid(!hasErrors);
-  }, [data, rules]);
+  }, [memoizedData, memoizedRules, validateField]);
 
-  const validateSingleField = (fieldName: string, value: string) => {
+  const validateSingleField = useCallback((fieldName: string, value: string) => {
     const error = validateField(fieldName, value);
     setErrors(prev => ({
       ...prev,
       [fieldName]: error
     }));
     return error;
-  };
+  }, [validateField]);
 
   return {
     errors,
