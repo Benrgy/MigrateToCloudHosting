@@ -1,3 +1,4 @@
+import React from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Clock, Share2 } from "lucide-react";
@@ -6,7 +7,7 @@ import { useCalculatorSharing } from "@/utils/calculator";
 import { CalculatorInputs } from "@/components/calculator/CalculatorInputs";
 import { CalculatorResults } from "@/components/calculator/CalculatorResults";
 
-export const EnhancedCalculator = () => {
+export const EnhancedCalculator = React.memo(() => {
   const {
     currentCost,
     setCurrentCost,
@@ -78,4 +79,6 @@ export const EnhancedCalculator = () => {
       </div>
     </section>
   );
-};
+});
+
+EnhancedCalculator.displayName = 'EnhancedCalculator';

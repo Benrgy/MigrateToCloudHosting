@@ -1,3 +1,4 @@
+import React from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Share2 } from "lucide-react";
@@ -17,7 +18,7 @@ interface CalculatorResultsProps {
   conversionRate: number;
 }
 
-export const CalculatorResults = ({
+export const CalculatorResults = React.memo(({
   showResults,
   visitors,
   metrics,
@@ -124,4 +125,6 @@ export const CalculatorResults = ({
       </Card>
     </>
   );
-};
+});
+
+CalculatorResults.displayName = 'CalculatorResults';
