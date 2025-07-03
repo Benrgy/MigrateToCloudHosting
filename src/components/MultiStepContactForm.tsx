@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo, useCallback } from "react";
+import { useState, useEffect, useMemo, useCallback, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { Card, CardContent } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
@@ -7,6 +7,7 @@ import { analytics } from "@/services/analytics";
 import { calculateLeadScore } from "@/utils/leadScoring";
 import { useAutoSave } from "@/hooks/useAutoSave";
 import { useFormValidation } from "@/hooks/useFormValidation";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { FormData, steps } from "./forms/types";
 import { FormProgress } from "./forms/FormProgress";
 import { FormStep1 } from "./forms/FormStep1";
@@ -14,7 +15,7 @@ import { FormStep2 } from "./forms/FormStep2";
 import { FormStep3 } from "./forms/FormStep3";
 import { FormNavigation } from "./forms/FormNavigation";
 
-export const MultiStepContactForm = () => {
+export const MultiStepContactForm = memo(() => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
     name: "",
@@ -187,7 +188,7 @@ export const MultiStepContactForm = () => {
     }
   }, [validateStep, formData, currentStep, clearSaved, toast, navigate]);
 
-  const renderCurrentStep = () => {
+  const renderCurrentStep = useCallback(() => {
     switch (currentStep) {
       case 1:
         return <FormStep1 formData={formData} onInputChange={handleInputChange} errors={errors} />;
@@ -198,10 +199,11 @@ export const MultiStepContactForm = () => {
       default:
         return null;
     }
-  };
+  }, [currentStep, formData, handleInputChange, errors]);
 
   return (
-    <section id="contact" className="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">
+    <ErrorBoundary>
+      <section id="contact" className="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">
       <div className="container mx-auto px-6">
         <div className="max-w-2xl mx-auto">
           <div className="text-center mb-8">
@@ -239,6 +241,9 @@ export const MultiStepContactForm = () => {
           </div>
         </div>
       </div>
-    </section>
+      </section>
+    </ErrorBoundary>
   );
-};
+});
+
+MultiStepContactForm.displayName = 'MultiStepContactForm';

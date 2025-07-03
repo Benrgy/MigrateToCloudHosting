@@ -1,9 +1,14 @@
+import React, { memo } from 'react';
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 
-export const CalculatorSkeleton = () => {
+interface CalculatorSkeletonProps {
+  className?: string;
+}
+
+export const CalculatorSkeleton = memo(({ className }: CalculatorSkeletonProps) => {
   return (
-    <div className="space-y-6">
+    <div className={`space-y-6 ${className || ''}`}>
       {/* Lost Revenue Card Skeleton */}
       <Card className="border-red-200 bg-red-50">
         <CardHeader>
@@ -59,4 +64,6 @@ export const CalculatorSkeleton = () => {
       </Card>
     </div>
   );
-};
+});
+
+CalculatorSkeleton.displayName = 'CalculatorSkeleton';
