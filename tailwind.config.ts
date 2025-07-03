@@ -61,6 +61,15 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				// Cloud hosting theme colors
+				cloud: {
+					primary: 'hsl(var(--cloud-primary))',
+					secondary: 'hsl(var(--cloud-secondary))',
+					accent: 'hsl(var(--cloud-accent))',
+					success: 'hsl(var(--cloud-success))',
+					warning: 'hsl(var(--cloud-warning))',
+					error: 'hsl(var(--cloud-error))'
 				}
 			},
 			borderRadius: {
@@ -75,8 +84,28 @@ export default {
 					},
 					to: {
 						height: 'var(--radix-accordion-content-height)'
-					}
 				},
+				// Enhanced animations for cloud hosting theme
+				'float': {
+					'0%, 100%': { transform: 'translateY(0px)' },
+					'50%': { transform: 'translateY(-10px)' }
+				},
+				'pulse-slow': {
+					'0%, 100%': { opacity: '1' },
+					'50%': { opacity: '0.5' }
+				},
+				'slide-up': {
+					'0%': { transform: 'translateY(100%)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'slide-down': {
+					'0%': { transform: 'translateY(-100%)', opacity: '0' },
+					'100%': { transform: 'translateY(0)', opacity: '1' }
+				},
+				'scale-in': {
+					'0%': { transform: 'scale(0.95)', opacity: '0' },
+					'100%': { transform: 'scale(1)', opacity: '1' }
+				}
 				'accordion-up': {
 					from: {
 						height: 'var(--radix-accordion-content-height)'
@@ -88,7 +117,12 @@ export default {
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'float': 'float 6s ease-in-out infinite',
+				'pulse-slow': 'pulse-slow 4s ease-in-out infinite',
+				'slide-up': 'slide-up 0.5s ease-out',
+				'slide-down': 'slide-down 0.5s ease-out',
+				'scale-in': 'scale-in 0.3s ease-out'
 			}
 		}
 	},

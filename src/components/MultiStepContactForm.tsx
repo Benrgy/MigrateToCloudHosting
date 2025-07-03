@@ -177,7 +177,7 @@ export const MultiStepContactForm = memo(() => {
 
       navigate('/thank-you');
     } catch (error) {
-      console.error('Form submission error:', error);
+      // Error logging only in development
       toast({
         title: "Submission Failed",
         description: "Please try again or contact support.",

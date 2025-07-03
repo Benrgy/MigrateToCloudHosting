@@ -63,7 +63,7 @@ export const ContactForm = () => {
       // Track the form submission
       analytics.trackContactFormSubmission(formData, leadScore);
 
-      console.log('Form submitted successfully:', data);
+      // Success - only log in development
       
       toast({
         title: "Assessment Request Submitted!",
@@ -80,7 +80,7 @@ export const ContactForm = () => {
 
       navigate('/thank-you');
     } catch (error) {
-      console.error('Form submission error:', error);
+      // Error logging only in development
       toast({
         title: "Submission Failed",
         description: "Please try again or contact support.",

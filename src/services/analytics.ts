@@ -33,10 +33,15 @@ class AnalyticsService {
         ]);
 
       if (error) {
-        console.error('Analytics tracking error:', error);
+        // Fail silently in production to avoid console noise
+        if (process.env.NODE_ENV === 'development') {
+          console.error('Analytics tracking error:', error);
+        }
       }
     } catch (error) {
-      console.error('Failed to track analytics event:', error);
+      if (process.env.NODE_ENV === 'development') {
+        console.error('Failed to track analytics event:', error);
+      }
     }
   }
 

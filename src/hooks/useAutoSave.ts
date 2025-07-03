@@ -31,7 +31,7 @@ export const useAutoSave = (key: string, data: AutoSaveData, delay: number = 200
           localStorage.setItem(key, JSON.stringify(data));
           setLastSaved(new Date());
         } catch (error) {
-          console.warn('Failed to save to localStorage:', error);
+          // Silent fail in production for localStorage
         }
       }
     }, delay);
@@ -48,7 +48,7 @@ export const useAutoSave = (key: string, data: AutoSaveData, delay: number = 200
       localStorage.removeItem(key);
       setLastSaved(null);
     } catch (error) {
-      console.warn('Failed to clear localStorage:', error);
+      // Silent fail in production for localStorage
     }
   }, [key]);
 
@@ -57,7 +57,7 @@ export const useAutoSave = (key: string, data: AutoSaveData, delay: number = 200
       const saved = localStorage.getItem(key);
       return saved ? JSON.parse(saved) : null;
     } catch (error) {
-      console.warn('Failed to load from localStorage:', error);
+      // Silent fail in production for localStorage
       return null;
     }
   }, [key]);

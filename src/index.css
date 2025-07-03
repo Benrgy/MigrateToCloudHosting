@@ -4,7 +4,7 @@
 @tailwind utilities;
 @import "./styles/animations.css";
 
-/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. */
+/* Design system for cloud hosting migration site - Professional blue/green gradient theme */
 
 @layer base {
   :root {
@@ -17,8 +17,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 222.2 84% 4.9%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --primary: 214 95% 53%;
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
@@ -45,7 +45,29 @@
     --sidebar-accent: 240 4.8% 95.9%;
     --sidebar-accent-foreground: 240 5.9% 10%;
     --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-ring: 214 95% 53%;
+    
+    /* Custom theme variables for cloud hosting */
+    --cloud-primary: 214 95% 53%;
+    --cloud-secondary: 160 84% 39%;
+    --cloud-accent: 213 94% 68%;
+    --cloud-success: 142 71% 45%;
+    --cloud-warning: 36 84% 59%;
+    --cloud-error: 0 84% 60%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(214 95% 53%), hsl(160 84% 39%));
+    --gradient-hero: linear-gradient(135deg, hsl(214 95% 53%) 0%, hsl(160 84% 39%) 50%, hsl(213 94% 68%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    
+    /* Shadows */
+    --shadow-soft: 0 4px 6px -1px hsl(214 95% 53% / 0.1), 0 2px 4px -1px hsl(214 95% 53% / 0.06);
+    --shadow-medium: 0 10px 15px -3px hsl(214 95% 53% / 0.1), 0 4px 6px -2px hsl(214 95% 53% / 0.05);
+    --shadow-large: 0 25px 50px -12px hsl(214 95% 53% / 0.25);
+    
+    /* Transitions */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
   }
 
   .dark {
@@ -106,10 +128,56 @@
   }
 }
 
-/* Performance: GPU acceleration for animations */
+/* Performance optimizations and utility classes */
 @layer utilities {
   .gpu-accelerated {
     transform: translateZ(0);
     will-change: transform;
+  }
+  
+  .text-gradient-primary {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  
+  .bg-gradient-hero {
+    background: var(--gradient-hero);
+  }
+  
+  .bg-gradient-card {
+    background: var(--gradient-card);
+  }
+  
+  .shadow-cloud-soft {
+    box-shadow: var(--shadow-soft);
+  }
+  
+  .shadow-cloud-medium {
+    box-shadow: var(--shadow-medium);
+  }
+  
+  .shadow-cloud-large {
+    box-shadow: var(--shadow-large);
+  }
+  
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+  
+  .transition-bounce {
+    transition: var(--transition-bounce);
+  }
+  
+  /* Scroll margin for proper anchor navigation */
+  .scroll-target {
+    scroll-margin-top: 5rem;
+  }
+  
+  /* Custom focus styles for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus:ring-2 focus:ring-offset-2;
+    focus:ring-color: hsl(var(--cloud-primary));
   }
 }
