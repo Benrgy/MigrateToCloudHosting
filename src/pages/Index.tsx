@@ -1,5 +1,5 @@
 
-import { Calculator } from "@/components/Calculator";
+import { EnhancedCalculator } from "@/components/EnhancedCalculator";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
 import { Benefits } from "@/components/Benefits";
@@ -22,7 +22,7 @@ export default function Index() {
         <Hero />
         <ContactForm />
         <TrustIndicators />
-        <Calculator />
+        <EnhancedCalculator />
         <Features />
         <VideoSection />
         <Benefits />
