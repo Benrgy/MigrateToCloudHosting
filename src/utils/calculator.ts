@@ -1,9 +1,13 @@
 import { useToast } from "@/hooks/use-toast";
+import { analytics } from "@/services/analytics";
 
 export const useCalculatorSharing = () => {
   const { toast } = useToast();
 
   const shareCalculator = async (lostRevenue: number) => {
+    // Track the share event
+    analytics.trackCalculatorShare(lostRevenue);
+    
     const shareData = {
       title: 'Website Speed Cost Calculator - See How Much Slow Hosting Costs You',
       text: `I just discovered I'm losing $${lostRevenue.toFixed(0)}/month due to slow hosting! Check how much you're losing:`,

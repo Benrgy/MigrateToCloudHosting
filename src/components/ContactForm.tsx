@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { analytics } from "@/services/analytics";
+import { calculateLeadScore } from "@/utils/leadScoring";
 
 interface FormData {
   name: string;
@@ -30,7 +32,17 @@ export const ContactForm = () => {
     setIsSubmitting(true);
 
     try {
-      // Insert form data into Supabase
+      // Calculate lead score based on form data and potential calculator results
+      const leadScore = calculateLeadScore({
+        visitors: 5000, // Default estimate - could be enhanced with actual calculator data
+        currentCost: 25, // Default estimate
+        website: formData.website,
+        currentHost: formData.currentHost,
+        lostRevenue: 500, // Default estimate
+        potentialYearlySavings: 6000 // Default estimate
+      });
+
+      // Insert form data into Supabase with lead score
       const { data, error } = await supabase
         .from('contact_submissions')
         .insert([
@@ -39,6 +51,7 @@ export const ContactForm = () => {
             email: formData.email,
             website: formData.website,
             current_host: formData.currentHost,
+            lead_score: leadScore,
           }
         ])
         .select();
@@ -46,6 +59,9 @@ export const ContactForm = () => {
       if (error) {
         throw error;
       }
+
+      // Track the form submission
+      analytics.trackContactFormSubmission(formData, leadScore);
 
       console.log('Form submitted successfully:', data);
       
@@ -82,6 +98,10 @@ export const ContactForm = () => {
     }));
   };
 
+  const handleFormFocus = () => {
+    analytics.trackContactFormStart();
+  };
+
   return (
     <section id="contact" className="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">
       <div className="container mx-auto px-6">
@@ -96,7 +116,7 @@ export const ContactForm = () => {
           </div>
 
           <div className="bg-white rounded-2xl shadow-2xl p-8">
-            <form onSubmit={handleSubmit} className="space-y-6">
+            <form onSubmit={handleSubmit} onFocus={handleFormFocus} className="space-y-6">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
                   <Label htmlFor="name" className="text-gray-700 font-medium">Your Name *</Label>

@@ -2,6 +2,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calculator, Share2 } from "lucide-react";
 import { useCalculatorSharing } from "@/utils/calculator";
+import { analytics } from "@/services/analytics";
 
 interface CalculatorResultsProps {
   showResults: boolean;
@@ -98,7 +99,10 @@ export const CalculatorResults = ({
             Start your free 3-day migration today and see immediate results
           </p>
           <Button 
-            onClick={() => window.open('https://www.cloudways.com/en/?id=1384181', '_blank')}
+            onClick={() => {
+              analytics.trackCTAClick('migration_cta', 'calculator_results');
+              window.open('https://www.cloudways.com/en/?id=1384181', '_blank');
+            }}
             className="bg-yellow-400 text-gray-900 hover:bg-yellow-500 text-xl px-8 py-4 font-bold transform hover:scale-105 transition-all duration-300"
           >
             Start FREE Migration Now

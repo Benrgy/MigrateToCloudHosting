@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useToast } from "@/hooks/use-toast";
+import { analytics } from "@/services/analytics";
 
 export const useCalculator = () => {
   const [currentCost, setCurrentCost] = useState<number>(0);
@@ -46,6 +47,21 @@ export const useCalculator = () => {
       });
       return;
     }
+
+    const metrics = calculateMetrics();
+    
+    // Track the calculation event
+    analytics.trackCalculatorCalculation(
+      {
+        currentCost,
+        visitors,
+        conversionRate,
+        averageOrderValue,
+        loadingTime
+      },
+      metrics
+    );
+
     setShowResults(true);
     // Smooth scroll to results
     setTimeout(() => {
