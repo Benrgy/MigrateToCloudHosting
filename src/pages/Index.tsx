@@ -11,7 +11,7 @@ import { VideoSection } from "@/components/VideoSection";
 import { TrustIndicators } from "@/components/TrustIndicators";
 import { FinalCTA } from "@/components/FinalCTA";
 import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
-import { ContactForm } from "@/components/ContactForm";
+import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 
 export default function Index() {
@@ -23,7 +23,7 @@ export default function Index() {
       
       <main id="main-content">
         <Hero />
-        <ContactForm />
+        <MultiStepContactForm />
         <TrustIndicators />
         <EnhancedCalculator />
         <Features />
