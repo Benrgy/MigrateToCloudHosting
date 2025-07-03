@@ -1,5 +1,6 @@
 
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 export const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
@@ -80,13 +81,13 @@ export const FAQ = () => {
                     {index < 5 && (
                       <div className="mt-4 pt-4 border-t border-gray-200">
                         <div className="flex flex-col sm:flex-row gap-3">
-                          <a 
-                            href="/calculator" 
+                          <Link 
+                            to="/calculator" 
                             className="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-full hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 font-semibold text-sm"
                           >
                             <i className="fas fa-calculator mr-2" aria-hidden="true"></i>
                             Calculate Migration Time
-                          </a>
+                          </Link>
                           <a 
                             href="https://www.cloudways.com/en/?id=1384181" 
                             target="_blank" 
@@ -127,13 +128,13 @@ export const FAQ = () => {
             Use our tools, get your free assessment, and take the next step towards a faster, more secure website!
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <a 
-              href="/calculator" 
+            <Link 
+              to="/calculator" 
               className="inline-flex items-center px-8 py-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transform hover:scale-105 transition-all duration-300 font-semibold shadow-lg"
             >
               <i className="fas fa-calculator mr-2" aria-hidden="true"></i>
               Use Migration Calculator
-            </a>
+            </Link>
             <a 
               href="https://www.cloudways.com/en/?id=1384181" 
               target="_blank" 

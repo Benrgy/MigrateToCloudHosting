@@ -1,4 +1,6 @@
 
+import { Link } from "react-router-dom";
+
 export const ThankYou = () => {
   return (
     <div className="min-h-screen bg-gradient-to-br from-green-600 via-blue-600 to-purple-600 text-white flex items-center justify-center">
@@ -50,11 +52,11 @@ export const ThankYou = () => {
           </div>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
-            <a href="/calculator" 
+            <Link to="/calculator" 
                className="inline-block px-8 py-4 bg-white text-gray-900 rounded-full hover:bg-gray-100 font-semibold transition-colors duration-300">
                 <i className="fas fa-calculator mr-2" aria-hidden="true"></i>
                 Use Migration Calculator
-            </a>
+            </Link>
             <a href="https://www.cloudways.com/en/?id=1384181" 
                target="_blank" 
                rel="noopener"
