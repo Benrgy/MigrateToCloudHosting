@@ -1,9 +1,9 @@
 import { LazyEnhancedCalculator } from "@/components/LazyEnhancedCalculator";
 import { Hero } from "@/components/Hero";
 import { Features } from "@/components/Features";
-import { Benefits } from "@/components/Benefits";
-import { Testimonials } from "@/components/Testimonials";
-import { FAQ } from "@/components/FAQ";
+import { OptimizedBenefits } from "@/components/enhanced/OptimizedBenefits";
+import { OptimizedTestimonials } from "@/components/enhanced/OptimizedTestimonials";
+import { OptimizedFAQ } from "@/components/enhanced/OptimizedFAQ";
 import { Footer } from "@/components/Footer";
 import { Header } from "@/components/Header";
 import { VideoSection } from "@/components/VideoSection";
@@ -35,9 +35,9 @@ export default function Index() {
         <LazyEnhancedCalculator />
         <Features />
         <VideoSection />
-        <Benefits />
-        <Testimonials />
-        <FAQ />
+        <OptimizedBenefits />
+        <OptimizedTestimonials />
+        <OptimizedFAQ />
         <FinalCTA />
         <AffiliateDisclosure />
       </main>
