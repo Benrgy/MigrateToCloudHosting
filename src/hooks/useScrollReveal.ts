@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
 export const useScrollReveal = () => {
   const observerRef = useRef<IntersectionObserver | null>(null);

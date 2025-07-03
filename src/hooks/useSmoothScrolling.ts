@@ -1,8 +1,6 @@
-import { useEffect, useCallback, useRef } from 'react';
+import { useEffect, useCallback } from 'react';
 
 export const useSmoothScrolling = () => {
-  const handlersRef = useRef<(() => void)[]>([]);
-
   useEffect(() => {
     // Add smooth scrolling to all anchor links
     const handleClick = (e: MouseEvent) => {
@@ -21,11 +19,7 @@ export const useSmoothScrolling = () => {
     };
 
     document.addEventListener('click', handleClick);
-    
-    const cleanup = () => document.removeEventListener('click', handleClick);
-    handlersRef.current.push(cleanup);
-    
-    return cleanup;
+    return () => document.removeEventListener('click', handleClick);
   }, []);
 
   const scrollToSection = useCallback((sectionId: string) => {
@@ -36,14 +30,6 @@ export const useSmoothScrolling = () => {
         block: 'start'
       });
     }
-  }, []);
-
-  // Cleanup all handlers on unmount
-  useEffect(() => {
-    return () => {
-      handlersRef.current.forEach(cleanup => cleanup());
-      handlersRef.current = [];
-    };
   }, []);
 
   return { scrollToSection };
