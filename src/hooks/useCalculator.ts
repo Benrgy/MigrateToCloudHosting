@@ -34,7 +34,11 @@ export const useCalculator = () => {
       netBenefit: Math.max(0, netBenefit),
       yearlyBenefit: Math.max(0, yearlyBenefit),
       effectiveConversionRate,
-      loadingImpact: loadingImpact * 100
+      loadingImpact: loadingImpact * 100,
+      // Additional metrics for OptimizedCalculatorResults
+      potentialYearlySavings: Math.max(0, yearlyBenefit),
+      timeWasted: (loadingTime - 2) * visitors * 0.0001, // Hours wasted per month
+      seoImpact: loadingImpact * 100
     };
   };
 

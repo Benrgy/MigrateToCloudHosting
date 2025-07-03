@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Clock, Share2 } from "lucide-react";
 import { useCalculator } from "@/hooks/useCalculator";
 import { useCalculatorSharing } from "@/utils/calculator";
-import { CalculatorInputs } from "@/components/calculator/CalculatorInputs";
-import { CalculatorResults } from "@/components/calculator/CalculatorResults";
+import { OptimizedCalculatorInputs } from "@/components/performance/OptimizedCalculatorInputs";
+import { OptimizedCalculatorResults } from "@/components/performance/OptimizedCalculatorResults";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 export const EnhancedCalculator = memo(() => {
@@ -59,7 +59,7 @@ export const EnhancedCalculator = memo(() => {
 
             <div className="grid lg:grid-cols-2 gap-8">
               <ErrorBoundary>
-                <CalculatorInputs
+                <OptimizedCalculatorInputs
                   currentCost={currentCost}
                   setCurrentCost={setCurrentCost}
                   visitors={visitors}
@@ -76,7 +76,7 @@ export const EnhancedCalculator = memo(() => {
 
               <div className="space-y-6" id="calculator-results">
                 <ErrorBoundary>
-                  <CalculatorResults
+                  <OptimizedCalculatorResults
                     showResults={showResults}
                     visitors={visitors}
                     metrics={calculateMetrics}
