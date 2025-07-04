@@ -56,14 +56,14 @@
     --cloud-error: 0 84% 60%;
     
     /* Gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(214 95% 53%), hsl(160 84% 39%));
-    --gradient-hero: linear-gradient(135deg, hsl(214 95% 53%) 0%, hsl(160 84% 39%) 50%, hsl(213 94% 68%) 100%);
-    --gradient-card: linear-gradient(145deg, hsl(0 0% 100%) 0%, hsl(210 40% 98%) 100%);
+    --gradient-primary: linear-gradient(135deg, hsl(214, 95%, 53%), hsl(160, 84%, 39%));
+    --gradient-hero: linear-gradient(135deg, hsl(214, 95%, 53%) 0%, hsl(160, 84%, 39%) 50%, hsl(213, 94%, 68%) 100%);
+    --gradient-card: linear-gradient(145deg, hsl(0, 0%, 100%) 0%, hsl(210, 40%, 98%) 100%);
     
     /* Shadows */
-    --shadow-soft: 0 4px 6px -1px hsl(214 95% 53% / 0.1), 0 2px 4px -1px hsl(214 95% 53% / 0.06);
-    --shadow-medium: 0 10px 15px -3px hsl(214 95% 53% / 0.1), 0 4px 6px -2px hsl(214 95% 53% / 0.05);
-    --shadow-large: 0 25px 50px -12px hsl(214 95% 53% / 0.25);
+    --shadow-soft: 0 4px 6px -1px rgba(59, 130, 246, 0.1), 0 2px 4px -1px rgba(59, 130, 246, 0.06);
+    --shadow-medium: 0 10px 15px -3px rgba(59, 130, 246, 0.1), 0 4px 6px -2px rgba(59, 130, 246, 0.05);
+    --shadow-large: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
     
     /* Transitions */
     --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
