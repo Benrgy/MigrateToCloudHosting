@@ -76,7 +76,6 @@
 
   body {
     @apply bg-background text-foreground;
-    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   }
   
   html {
@@ -88,35 +87,18 @@
   .text-gradient-primary {
     background: linear-gradient(135deg, #3b82f6, #10b981);
     background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: transparent;
   }
   
   .bg-gradient-hero {
     background: linear-gradient(135deg, #3b82f6 0%, #10b981 50%, #60a5fa 100%);
   }
   
-  .bg-gradient-card {
-    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-  }
-  
   .shadow-cloud-soft {
     box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.1);
   }
   
-  .shadow-cloud-medium {
-    box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.1);
-  }
-  
-  .shadow-cloud-large {
-    box-shadow: 0 25px 50px -12px rgba(59, 130, 246, 0.25);
-  }
-  
   .transition-smooth {
     transition: all 0.3s ease;
-  }
-  
-  .scroll-target {
-    scroll-margin-top: 5rem;
   }
 }
