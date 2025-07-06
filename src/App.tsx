@@ -24,7 +24,7 @@ function App() {
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter basename="/MigrateToCloudHosting">
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/calculator" element={<CalculatorPage />} />
