@@ -211,8 +211,34 @@ export const MultiStepContactForm = memo(() => {
         return null;
     }
   }, [currentStep, formData, handleInputChange, errors]);
-  return <ErrorBoundary>
-      
-    </ErrorBoundary>;
+  return (
+    <ErrorBoundary>
+      <Card className="w-full max-w-2xl mx-auto">
+        <CardContent className="p-6">
+          <FormProgress currentStep={currentStep} steps={steps} />
+          
+          <div className="mt-6">
+            {renderCurrentStep()}
+          </div>
+          
+          <FormNavigation
+            currentStep={currentStep}
+            steps={steps}
+            onPrevStep={prevStep}
+            onNextStep={nextStep}
+            onSubmit={handleSubmit}
+            isSubmitting={isSubmitting}
+            canProceed={validateStep(currentStep)}
+          />
+          
+          {lastSaved && (
+            <div className="text-xs text-muted-foreground mt-4 text-center">
+              Last saved: {lastSaved.toLocaleTimeString()}
+            </div>
+          )}
+        </CardContent>
+      </Card>
+    </ErrorBoundary>
+  );
 });
 MultiStepContactForm.displayName = 'MultiStepContactForm';
