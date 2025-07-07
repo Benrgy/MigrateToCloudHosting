@@ -23,16 +23,11 @@ export interface StepProps {
 export const steps: Step[] = [
   {
     id: 1,
-    title: "Tell us about yourself",
-    description: "Basic information to get started"
-  },
-  {
-    id: 2,
     title: "Your website details",
     description: "Help us understand your current setup"
   },
   {
-    id: 3,
+    id: 2,
     title: "Business context",
     description: "A few more details to customize your plan"
   }

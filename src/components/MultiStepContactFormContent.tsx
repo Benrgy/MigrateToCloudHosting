@@ -3,7 +3,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { FormData, steps } from "./forms/types";
 import { FormProgress } from "./forms/FormProgress";
-import { FormStep1 } from "./forms/FormStep1";
 import { FormStep2 } from "./forms/FormStep2";
 import { FormStep3 } from "./forms/FormStep3";
 import { FormNavigation } from "./forms/FormNavigation";
@@ -36,10 +35,8 @@ export const MultiStepContactFormContent = memo(({
   const renderCurrentStep = useCallback(() => {
     switch (currentStep) {
       case 1:
-        return <FormStep1 formData={formData} onInputChange={onInputChange} errors={errors} />;
-      case 2:
         return <FormStep2 formData={formData} onInputChange={onInputChange} errors={errors} />;
-      case 3:
+      case 2:
         return <FormStep3 formData={formData} onInputChange={onInputChange} errors={errors} />;
       default:
         return null;

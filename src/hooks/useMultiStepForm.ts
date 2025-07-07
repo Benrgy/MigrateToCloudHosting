@@ -76,10 +76,8 @@ export const useMultiStepForm = () => {
   const validateStep = useCallback((step: number): boolean => {
     switch (step) {
       case 1:
-        return !errors.name && !errors.email && formData.name.length > 0 && formData.email.length > 0;
-      case 2:
         return !errors.website && !errors.currentHost && formData.website.length > 0 && formData.currentHost.length > 0;
-      case 3:
+      case 2:
         return !errors.monthlyTraffic && !errors.businessType && formData.monthlyTraffic.length > 0 && formData.businessType.length > 0;
       default:
         return true;
@@ -103,7 +101,7 @@ export const useMultiStepForm = () => {
   }, []);
 
   const handleSubmit = useCallback(async () => {
-    if (!validateStep(3)) {
+    if (!validateStep(2)) {
       toast({
         title: "Please complete all fields",
         description: "Fill in all required information before submitting.",
