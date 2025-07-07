@@ -14,7 +14,6 @@ import { FormStep1 } from "./forms/FormStep1";
 import { FormStep2 } from "./forms/FormStep2";
 import { FormStep3 } from "./forms/FormStep3";
 import { FormNavigation } from "./forms/FormNavigation";
-
 export const MultiStepContactForm = memo(() => {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState<FormData>({
@@ -29,19 +28,41 @@ export const MultiStepContactForm = memo(() => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [hasStartedForm, setHasStartedForm] = useState(false);
   const navigate = useNavigate();
-  const { toast } = useToast();
+  const {
+    toast
+  } = useToast();
 
   // Auto-save functionality
-  const { lastSaved, clearSaved, loadSaved } = useAutoSave('contact-form-data', formData);
+  const {
+    lastSaved,
+    clearSaved,
+    loadSaved
+  } = useAutoSave('contact-form-data', formData);
 
   // Memoized validation rules to prevent infinite loops
   const validationRules = useMemo(() => ({
-    name: { required: true, minLength: 2 },
-    email: { required: true, email: true },
-    website: { required: true, url: true },
-    currentHost: { required: true, minLength: 2 },
-    monthlyTraffic: { required: true },
-    businessType: { required: true }
+    name: {
+      required: true,
+      minLength: 2
+    },
+    email: {
+      required: true,
+      email: true
+    },
+    website: {
+      required: true,
+      url: true
+    },
+    currentHost: {
+      required: true,
+      minLength: 2
+    },
+    monthlyTraffic: {
+      required: true
+    },
+    businessType: {
+      required: true
+    }
   }), []);
 
   // Convert formData to Record<string, string> for validation
@@ -53,8 +74,10 @@ export const MultiStepContactForm = memo(() => {
     monthlyTraffic: formData.monthlyTraffic,
     businessType: formData.businessType
   }), [formData]);
-
-  const { errors, validateField } = useFormValidation(validationRules, formDataForValidation);
+  const {
+    errors,
+    validateField
+  } = useFormValidation(validationRules, formDataForValidation);
 
   // Load saved data on component mount
   useEffect(() => {
@@ -63,11 +86,10 @@ export const MultiStepContactForm = memo(() => {
       setFormData(savedData as FormData);
       toast({
         title: "Form data restored",
-        description: "Your previous input has been restored.",
+        description: "Your previous input has been restored."
       });
     }
   }, [loadSaved, toast]);
-
   const handleInputChange = useCallback((field: keyof FormData, value: string) => {
     setFormData(prev => ({
       ...prev,
@@ -76,13 +98,11 @@ export const MultiStepContactForm = memo(() => {
 
     // Real-time validation
     validateField(field, value);
-
     if (!hasStartedForm) {
       analytics.trackContactFormStart();
       setHasStartedForm(true);
     }
   }, [validateField, hasStartedForm]);
-
   const validateStep = useCallback((step: number): boolean => {
     switch (step) {
       case 1:
@@ -95,7 +115,6 @@ export const MultiStepContactForm = memo(() => {
         return true;
     }
   }, [errors, formData]);
-
   const nextStep = useCallback(() => {
     if (validateStep(currentStep)) {
       setCurrentStep(prev => Math.min(prev + 1, steps.length));
@@ -103,27 +122,23 @@ export const MultiStepContactForm = memo(() => {
       toast({
         title: "Please complete all fields",
         description: "Fill in all required information before proceeding.",
-        variant: "destructive",
+        variant: "destructive"
       });
     }
   }, [currentStep, validateStep, toast]);
-
   const prevStep = useCallback(() => {
     setCurrentStep(prev => Math.max(prev - 1, 1));
   }, []);
-
   const handleSubmit = useCallback(async () => {
     if (!validateStep(3)) {
       toast({
         title: "Please complete all fields",
         description: "Fill in all required information before submitting.",
-        variant: "destructive",
+        variant: "destructive"
       });
       return;
     }
-
     setIsSubmitting(true);
-
     try {
       // Enhanced lead scoring with multi-step form data
       const trafficNumber = parseInt(formData.monthlyTraffic.replace(/[^0-9]/g, '')) || 5000;
@@ -132,7 +147,8 @@ export const MultiStepContactForm = memo(() => {
         currentCost: 25,
         website: formData.website,
         currentHost: formData.currentHost,
-        lostRevenue: Math.max(100, trafficNumber * 0.02 * 50), // Estimated lost revenue
+        lostRevenue: Math.max(100, trafficNumber * 0.02 * 50),
+        // Estimated lost revenue
         potentialYearlySavings: Math.max(1000, trafficNumber * 0.24) // Estimated yearly savings
       });
 
@@ -150,12 +166,10 @@ export const MultiStepContactForm = memo(() => {
           form_type: 'multi_step'
         })
       };
-
-      const { data, error } = await supabase
-        .from('contact_submissions')
-        .insert([submissionData])
-        .select();
-
+      const {
+        data,
+        error
+      } = await supabase.from('contact_submissions').insert([submissionData]).select();
       if (error) {
         throw error;
       }
@@ -169,25 +183,22 @@ export const MultiStepContactForm = memo(() => {
 
       // Clear auto-saved data on successful submission
       clearSaved();
-
       toast({
         title: "Assessment Request Submitted!",
-        description: "We'll send your custom migration plan within 24 hours.",
+        description: "We'll send your custom migration plan within 24 hours."
       });
-
       navigate('/thank-you');
     } catch (error) {
       // Error logging only in development
       toast({
         title: "Submission Failed",
         description: "Please try again or contact support.",
-        variant: "destructive",
+        variant: "destructive"
       });
     } finally {
       setIsSubmitting(false);
     }
   }, [validateStep, formData, currentStep, clearSaved, toast, navigate]);
-
   const renderCurrentStep = useCallback(() => {
     switch (currentStep) {
       case 1:
@@ -200,50 +211,8 @@ export const MultiStepContactForm = memo(() => {
         return null;
     }
   }, [currentStep, formData, handleInputChange, errors]);
-
-  return (
-    <ErrorBoundary>
-      <section id="contact" className="py-16 bg-gradient-to-br from-blue-600 via-purple-600 to-blue-800">
-      <div className="container mx-auto px-6">
-        <div className="max-w-2xl mx-auto">
-          <div className="text-center mb-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
-              Get Your Free Migration Assessment
-            </h2>
-            <p className="text-xl text-blue-100">
-              Our experts will analyze your website and create a custom migration plan - completely free!
-            </p>
-          </div>
-
-          <Card className="shadow-2xl">
-            <FormProgress currentStep={currentStep} steps={steps} />
-
-            <CardContent className="space-y-6">
-              {renderCurrentStep()}
-
-              <FormNavigation
-                currentStep={currentStep}
-                steps={steps}
-                onPrevStep={prevStep}
-                onNextStep={nextStep}
-                onSubmit={handleSubmit}
-                canProceed={validateStep(currentStep)}
-                isSubmitting={isSubmitting}
-              />
-            </CardContent>
-          </Card>
-
-          <div className="mt-6 text-center">
-            <p className="text-sm text-blue-100">
-              <span className="mr-2 text-green-400">🛡️</span>
-              100% Free • No Obligation • Secure & Private
-            </p>
-          </div>
-        </div>
-      </div>
-      </section>
-    </ErrorBoundary>
-  );
+  return <ErrorBoundary>
+      
+    </ErrorBoundary>;
 });
-
 MultiStepContactForm.displayName = 'MultiStepContactForm';
