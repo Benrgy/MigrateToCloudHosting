@@ -15,7 +15,7 @@ import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 import { useSmoothScrolling } from "@/hooks/useSmoothScrolling";
 import { useExitIntent } from "@/components/ExitIntentPopup";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
-import { SEOHead } from "@/components/SEOHead";
+
 
 export default function Index() {
   usePageAnalytics('home');
@@ -25,7 +25,6 @@ export default function Index() {
   
   return (
     <div className="min-h-screen bg-gray-50">
-      <SEOHead />
       <Header />
       
       <main id="main-content">
