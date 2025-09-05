@@ -13,7 +13,6 @@ import { AffiliateDisclosure } from "@/components/AffiliateDisclosure";
 import { MultiStepContactForm } from "@/components/MultiStepContactForm";
 import { usePageAnalytics } from "@/hooks/usePageAnalytics";
 import { useSmoothScrolling } from "@/hooks/useSmoothScrolling";
-import { useExitIntent } from "@/components/ExitIntentPopup";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 
@@ -21,7 +20,6 @@ export default function Index() {
   usePageAnalytics('home');
   useSmoothScrolling();
   useScrollReveal();
-  const { ExitIntentPopup } = useExitIntent();
   
   return (
     <div className="min-h-screen bg-gray-50">
@@ -42,7 +40,6 @@ export default function Index() {
       </main>
 
       <Footer />
-      <ExitIntentPopup />
     </div>
   );
 }
