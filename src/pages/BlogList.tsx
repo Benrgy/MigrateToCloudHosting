@@ -7,6 +7,7 @@ import { Footer } from "@/components/Footer";
 import { Calendar, ArrowRight, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
+import type { Post } from "@/types/database-extensions";
 
 interface BlogPost {
   id: string;
@@ -30,14 +31,15 @@ export default function BlogList() {
 
   const fetchPosts = async () => {
     try {
-      const { data, error } = await supabase
+      // Type assertion needed until posts table is created in database
+      const response = await (supabase as any)
         .from('posts')
         .select('id, title, slug, excerpt, category, published_at, featured_image, featured_image_alt')
         .eq('status', 'published')
         .order('published_at', { ascending: false });
 
-      if (error) throw error;
-      setPosts((data as any) || []);
+      if (response.error) throw response.error;
+      setPosts(response.data || []);
     } catch (error) {
       console.error('Error fetching posts:', error);
       toast({

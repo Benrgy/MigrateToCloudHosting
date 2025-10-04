@@ -8,6 +8,7 @@ import { Calendar, ArrowLeft, Loader2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { useToast } from "@/hooks/use-toast";
 import ReactMarkdown from 'react-markdown';
+import type { Post } from "@/types/database-extensions";
 
 interface BlogPost {
   id: string;
@@ -39,15 +40,16 @@ export default function BlogPost() {
 
   const fetchPost = async (postSlug: string) => {
     try {
-      const { data, error } = await supabase
+      // Type assertion needed until posts table is created in database
+      const response = await (supabase as any)
         .from('posts')
         .select('*')
         .eq('slug', postSlug)
         .eq('status', 'published')
         .maybeSingle();
 
-      if (error) throw error;
-      setPost(data as any);
+      if (response.error) throw response.error;
+      setPost(response.data);
     } catch (error) {
       console.error('Error fetching post:', error);
       toast({
