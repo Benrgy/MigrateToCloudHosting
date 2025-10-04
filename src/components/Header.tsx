@@ -25,6 +25,7 @@ export const Header = () => {
     { name: 'Benefits', action: () => scrollToSection('benefits') },
     { name: 'Reviews', action: () => scrollToSection('testimonials') },
     { name: 'Calculator', href: '/calculator' },
+    { name: 'Blog', href: '/blog' },
     { name: 'FAQ', action: () => scrollToSection('faq') }
   ];
 

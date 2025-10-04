@@ -35,6 +35,15 @@ export const seoConfigs: Record<string, SEOConfig> = {
     ogDescription: 'Thank you for using our website speed calculator. Your personalized assessment is ready.',
     twitterTitle: 'Migration Assessment Complete',
     twitterDescription: 'Your personalized website migration assessment is ready'
+  },
+  '/blog': {
+    title: 'Blog - Website Performance & Hosting Insights',
+    description: 'Expert insights on website performance, hosting optimization, and migration strategies. Learn how to improve your site speed and boost conversions.',
+    keywords: 'website performance blog, hosting tips, migration guide, site speed optimization, web hosting insights',
+    ogTitle: 'Blog - Website Performance & Hosting Insights',
+    ogDescription: 'Expert insights on website performance, hosting optimization, and migration strategies.',
+    twitterTitle: 'Performance & Hosting Blog',
+    twitterDescription: 'Expert insights on website performance and hosting optimization'
   }
 };
 

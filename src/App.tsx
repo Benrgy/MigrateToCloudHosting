@@ -10,6 +10,8 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import CalculatorPage from "./pages/CalculatorPage";
 import ThankYouPage from "./pages/ThankYouPage";
+import BlogList from "./pages/BlogList";
+import BlogPost from "./pages/BlogPost";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -34,6 +36,8 @@ function App() {
                 <Route path="/" element={<Index />} />
                 <Route path="/calculator" element={<CalculatorPage />} />
                 <Route path="/thank-you" element={<ThankYouPage />} />
+                <Route path="/blog" element={<BlogList />} />
+                <Route path="/blog/:slug" element={<BlogPost />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
             </SEOWrapper>
