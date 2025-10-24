@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://your-domain.com/sitemap.xml
+Sitemap: https://migratetocloudhosting.com/sitemap.xml
 
 # Block common bot traffic to save resources
 User-agent: AhrefsBot
